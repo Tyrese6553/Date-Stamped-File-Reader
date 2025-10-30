@@ -7,7 +7,15 @@ from tkinter import filedialog
 
 class GUI:
     def __init__(self):
-        self.path = filedialog.askdirectory()
+        self.path = None
+
+        while not self.path:
+            user_path = filedialog.askdirectory(title="Select the Directory you would like to Read")
+            if user_path:
+                self.path = user_path
+            else:
+                if not messagebox.askyesno("No Directory Selected!", "You have to select a directory to continue. Would you like to try again?"):
+                    sys.exit()
 
         self.files = self.read_files()
 
@@ -88,22 +96,18 @@ class GUI:
         self.files = []
         date_list = []
         pattern = r"^Y([0-9]{4})M(0[0-9]|1[0-2])D(0[1-9]|1[0-9]|2[0-9]|3[0-1])\.[0-9]{4}$"
-        try:
-            for file in os.scandir(self.path):
-                matches = re.match(pattern, file.name)
-                if file.is_file() and matches:
-                    self.files.append(file.name)
-                    date = []
-                    y = int(matches.group(1))
-                    m = int(matches.group(2))
-                    d = int(matches.group(3))
-                    date.append(y)
-                    date.append(m)
-                    date.append(d)
-                    date_list.append(date)
-        except FileNotFoundError:
-            messagebox.showerror("No Directory!", "No directory selected")
-            sys.exit()
+        for file in os.scandir(self.path):
+            matches = re.match(pattern, file.name)
+            if file.is_file() and matches:
+                self.files.append(file.name)
+                date = []
+                y = int(matches.group(1))
+                m = int(matches.group(2))
+                d = int(matches.group(3))
+                date.append(y)
+                date.append(m)
+                date.append(d)
+                date_list.append(date)
         return date_list
 
 
@@ -128,7 +132,7 @@ class GUI:
             if not found:
                 self.output_list.insert(tkinter.END, "No matching files")
         except ValueError:
-            messagebox.showerror("Value Error!", "Enter value(s)")
+            messagebox.showerror("Value Error!", "Please double check your value(s)")
 
 
     def enter_shortcut(self, event):
