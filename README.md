@@ -9,7 +9,7 @@ Below is the application's GUI:
 
 ## How it Works
 
-* __Directory Selection:__ The application first prompts you to select a directory. Selecting 'Yes' reopens the directory window and selecting 'No' terminates the program.
+* __Directory Selection:__ The application first prompts you to select a directory. If you cancel or exit the dialog, it will ask if you wish to continue or terminate. Selecting '__Yes__' reopens the directory window and selecting '__No__' terminates the programme.
 * __Input:__ Once the directory is selected, the main application window appears, allowing you to enter the __Year__, __Month__, and __Day__.
 * __Search and Filter:__ Clicking '__Read Files__' (or pressing `Enter`) scans the directory. Files are filtered using a two-step process: a file check and a regular expression to ensure format validity. Matching files are then displayed in the listbox.
 * __Refresh:__ To re-scan the directory, click '__Refresh__' or use the shortcut `Control + R`.
