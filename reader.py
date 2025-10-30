@@ -117,14 +117,14 @@ class GUI:
     def find_file(self):
         date_list = self.read_files()
         try:
-            c = int(self.year_entry.get().strip())
-            r = int(self.month_entry.get().strip())
-            b = int(self.day_entry.get().strip())
+            y = int(self.year_entry.get().strip())
+            m = int(self.month_entry.get().strip())
+            d = int(self.day_entry.get().strip())
 
             self.output_list.delete(0, tkinter.END)
             found = False
             for index, filename in enumerate(date_list):
-                if c == filename[0] and r == filename[1] and b == filename[2]:
+                if y == filename[0] and m == filename[1] and d == filename[2]:
                     self.output_list.insert(tkinter.END, self.files[index])
                     found = True
             if not found:
