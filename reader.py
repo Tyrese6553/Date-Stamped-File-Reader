@@ -86,9 +86,9 @@ class GUI:
 
     def read_files(self):
         self.files = []
+        date_list = []
+        pattern = r"^Y([0-9]{4})M(0[0-9]|1[0-2])D(0[1-9]|1[0-9]|2[0-9]|3[0-1])\.[0-9]{4}$"
         try:
-            pattern = r"^Y([0-9]{4})M(0[0-9]|1[0-2])D(0[1-9]|1[0-9]|2[0-9]|3[0-1])\.[0-9]{4}$"
-            date_list = []
             for file in os.scandir(self.path):
                 matches = re.match(pattern, file.name)
                 if file.is_file() and matches:
