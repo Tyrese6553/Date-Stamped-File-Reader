@@ -17,8 +17,6 @@ class GUI:
                 if not messagebox.askyesno("No Directory Selected!", "You have to select a directory to continue. Would you like to try again?"):
                     sys.exit()
 
-        self.files = self.read_files()
-
         self.root = tkinter.Tk()
 
         self.root.title("File Reader App")
