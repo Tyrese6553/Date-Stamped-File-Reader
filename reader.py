@@ -116,17 +116,48 @@ class GUI:
 
     def find_file(self):
         date_list = self.read_files()
-        try:
-            y = int(self.year_entry.get().strip())
-            m = int(self.month_entry.get().strip())
-            d = int(self.day_entry.get().strip())
 
-            self.output_list.delete(0, tkinter.END)
-            found = False
-            for index, filename in enumerate(date_list):
-                if y == filename[0] and m == filename[1] and d == filename[2]:
-                    self.output_list.insert(tkinter.END, self.files[index])
-                    found = True
+        y = self.year_entry.get().strip()
+        m = self.month_entry.get().strip()
+        d = self.day_entry.get().strip()
+        found = False
+
+        try:
+            if y and m and d:
+                y = int(self.year_entry.get())
+                m = int(self.month_entry.get())
+                d = int(self.day_entry.get())
+
+                self.output_list.delete(0, tkinter.END)
+                for index, filename in enumerate(date_list):
+                    if y == filename[0] and m == filename[1] and d == filename[2]:
+                        self.output_list.insert(tkinter.END, self.files[index])
+                        found = True
+
+            elif y and not m and not d:
+                y = int(self.year_entry.get())
+                
+                self.output_list.delete(0, tkinter.END)
+                for index, filename in enumerate(date_list):
+                    if y == filename[0]:
+                        self.output_list.insert(tkinter.END, self.files[index])
+                        found = True
+            elif not y and m and not d:
+                    m = int(self.month_entry.get())
+                
+                    self.output_list.delete(0, tkinter.END)
+                    for index, filename in enumerate(date_list):
+                        if m == filename[1]:
+                            self.output_list.insert(tkinter.END, self.files[index])
+                            found = True
+            elif not y and not m and d:
+                    d = int(self.day_entry.get())
+                
+                    self.output_list.delete(0, tkinter.END)
+                    for index, filename in enumerate(date_list):
+                        if d == filename[2]:
+                            self.output_list.insert(tkinter.END, self.files[index])
+                            found = True
             if not found:
                 self.output_list.insert(tkinter.END, "No matching files")
         except ValueError:
